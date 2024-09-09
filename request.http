@@ -1,0 +1,17 @@
+get http://localhost:8000/ping
+###
+
+get http://localhost:8000/products
+###
+
+post http://localhost:8000/products
+Content-Type: application/json
+
+{
+  "name": "Computer",
+  "price": 3000
+}
+###
+
+get http://localhost:8000/products/1
+
