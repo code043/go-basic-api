@@ -51,29 +51,35 @@ Simple api in golang using gin and docker.
 
 ###
 
+```postgres
 psql (12.20 (Debian 12.20-1.pgdg120+1)) \
  Type "help" for help.
 
 code043=#
+```
 
 ##### Product table:
 
+```sql
     create table product (
         id serial primary key,
         product_name varchar(50) not null,
         price numeric(10, 2) not null
     );
+```
 
-#### Criate table:
+#### Create table:
 
+```postgres
 psql (12.20 (Debian 12.20-1.pgdg120+1)) \
  Type "help" for help.
 
 code043=#create table product (
-id serial primary key,
-product_name varchar(50) not null,
-price numeric(10, 2) not null
-);
+             id serial primary key,
+             product_name varchar(50) not null,
+             price numeric(10, 2) not null
+         );
+```
 
 #### Insert product:
 
@@ -81,10 +87,13 @@ price numeric(10, 2) not null
 
 ###
 
+```postgres
+
 psql (12.20 (Debian 12.20-1.pgdg120+1)) \
  Type "help" for help.
 
 code043=#insert into product (product_name, price) values('Coffee', 20);
+```
 
 #### Receiving logs:
 
