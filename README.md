@@ -17,12 +17,6 @@ Simple api in golang using gin and docker.
 
     go mod run main.go
 
-###
-
-    curl http://localhost:8000/products
-
-output: 10px is equal to 0.625rem
-
 ### Build the project:
 
     go build main.go
@@ -39,9 +33,13 @@ output: 10px is equal to 0.625rem
 
     docker build -t go-basic-api .
 
-#### Running container:
+#### Running container database:
 
     docker-compose up -d go-basic-db
+
+#### Running container api:
+
+    docker-compose up -d go-api-app
 
 #### Listing containers:
 
@@ -49,11 +47,70 @@ output: 10px is equal to 0.625rem
 
 #### Connecting to database;
 
-    docker exec -it go_db psql -U postgres -d code043
+    docker exec -it go-basic-db psql -U postgres -d code043
+
+###
+
+psql (12.20 (Debian 12.20-1.pgdg120+1)) \
+ Type "help" for help.
+
+code043=#
+
+##### Product table:
+
+    create table product (
+        id serial primary key,
+        product_name varchar(50) not null,
+        price numeric(10, 2) not null
+    );
+
+#### Criate table:
+
+psql (12.20 (Debian 12.20-1.pgdg120+1)) \
+ Type "help" for help.
+
+code043=#create table product (
+id serial primary key,
+product_name varchar(50) not null,
+price numeric(10, 2) not null
+);
+
+#### Insert product:
+
+     insert into product (product_name, price) values('Coffee', 20);
+
+###
+
+psql (12.20 (Debian 12.20-1.pgdg120+1)) \
+ Type "help" for help.
+
+code043=#insert into product (product_name, price) values('Coffee', 20);
 
 #### Receiving logs:
 
-    docker logs -f go-app
+    docker logs -f go-api-app
+
+### Send request:
+
+    curl http://localhost:8000/products
+
+output: [{"id_product":1,"name":"Coffee","price":20}]
+
+### Using Rest Client:
+
+    get http://localhost:8000/products
+
+#####
+
+```javascript
+[
+  {
+    id_product: 1,
+    name: "Coffee",
+    price: 20,
+  },
+];
+```
 
 ## Resources:
 
@@ -63,3 +120,9 @@ output: 10px is equal to 0.625rem
   - **install:** https://go.dev/doc/install
 - **Gin:**
   - **repo:** https://github.com/gin-gonic/gin
+- **Docker:**
+
+  - **install:** https://docs.docker.com/get-started/get-docker/
+
+- **Rest Client:**
+  - **install:** https://marketplace.visualstudio.com/items?itemName=humao.rest-client
